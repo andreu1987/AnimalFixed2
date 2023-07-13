@@ -1,8 +1,12 @@
-import Animal.Animal;
-import com.sun.tools.attach.AgentInitializationException;
+import animal.Animal;
+import animal.cat.Cat;
+import animal.dog.Dog;
+import animal.duck.Duck;
+import check.CheckAgeString;
+import check.CheckWeightString;
+import data.AgeColorData;
 import data.AnimalTypeData;
 import data.CommandsData;
-import factory.Animalfactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -53,10 +57,18 @@ public class Main {
                             continue;
                         }
 
-
-                        Animal animal = new Animal();
+                        Animal animal = null;
+                        switch (animalStr){
+                            case "CAT": animal = new Cat();
+                            break;
+                            case "DOG": animal = new Dog();
+                            break;
+                            case "DUCK": animal = new Duck();
+                        }
+                        //animals.add(fillAnimalDate(animal));
 
                         animals.add(fillAnimalDate(animal));
+
                         break;
                     }
 
@@ -64,6 +76,7 @@ public class Main {
                     case LIST: {
                         for (Animal animal : animals) {
                             System.out.println(animal.toString());
+                            animal.say();
                         }
                         break;
 
@@ -83,66 +96,64 @@ public class Main {
 
     }
 
-    private static Animal fillAnimalDate(Animal animal){
-            System.out.println("Ввидите имя животного");
-            animal.setName(scanner.next());
+    private static Animal fillAnimalDate(Animal animal) {
+        System.out.println("Ввидите имя животного");
+        animal.setName(scanner.next());
 
-            while (true) {
-                System.out.println("Ввидите цвет животного (WHITE,GRAY,BLACK)");
-                String ageColorStr = scanner.next().trim().toUpperCase(Locale.ROOT);
-                // защита от дурака
-                boolean isColorExist = false;
-                for (AgeColorData ageColorData : AgeColorData.values()) {
-                    if (ageColorData.name().equals(ageColorStr)) {
-                        isColorExist = true;
-                        break;
-                    }
+        while (true) {
+            System.out.println("Ввидите цвет животного (WHITE,GRAY,BLACK)");
+            String ageColorStr = scanner.next().trim().toUpperCase(Locale.ROOT);
+            // защита от дурака
+            boolean isColorExist = false;
+            for (AgeColorData ageColorData : AgeColorData.values()) {
+                if (ageColorData.name().equals(ageColorStr)) {
+                    isColorExist = true;
+                    break;
                 }
-                if (!isColorExist) {
-                    System.out.println(String.format("Введенный цвет %s не поддерживается", ageColorStr));
-                    continue;
-                }
-                animal.setColor(ageColorStr);
-                break;
             }
-
-
-                System.out.println("Ввидите возраст животного (от 1 до 7)");
-                //animal.setAge(Integer.parseInt(scanner.next()));
-                Scanner age = new Scanner(System.in);
-                int number;
-                while (true) {
-
-                    number = age.nextInt();
-                    if (number <= 0 || number >= 8) {
-                        System.out.println("Вы ввели не тот возраст что мы ожидаем!");
-                    } else {
-                        break;
-                    }
-                }
-                animal.setAge(number);
-                System.out.println("Спасибо! Получил " + number);
-
-
-                System.out.println("Ввидите вес животного от 1 до 20");
-                Scanner weight = new Scanner(System.in);
-                int numberWeight;
-                while (true) {
-                    numberWeight = age.nextInt();
-                    if (numberWeight <= 0 || numberWeight >= 20) {
-                        System.out.println("Вы ввели не тот вес что мы ожидаем!");
-                    } else {
-                        break;
-                    }
-                }
-                animal.setWeight(numberWeight);
-                System.out.println("Спасибо! Получил " + numberWeight);
-
-                return animal;
-
+            if (!isColorExist) {
+                System.out.println(String.format("Введенный цвет %s не поддерживается", ageColorStr));
+                continue;
+            }
+            animal.setColor(ageColorStr);
+            break;
         }
 
+        Integer age = 0;
+        do {
+            System.out.println("Ввидите возраст животного (от 1 до 7)");
+            age = CheckAgeString.ConvertIntStr(scanner.next());
+
+            if (age != null) {
+                break;
+            }
+            System.out.println("Вы ввели не тот возраст что мы ожидаем!");
+        } while (true);
+
+        animal.setAge(age);
+
+
+        Integer weight = 0;
+        do {
+            System.out.println("Ввидите вес животного (от 1 до 20)");
+            weight = CheckWeightString.ConvertWeigntString(scanner.next());
+
+            if (weight != null) {
+                break;
+            }
+            System.out.println("Вы ввели не тот вес что мы ожидаем!");
+        } while (true);
+
+        animal.setWeight(weight);
+
+
+       return animal;
     }
+
+}
+
+
+
 
 
 

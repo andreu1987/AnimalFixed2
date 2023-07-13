@@ -1,8 +1,8 @@
-package Duck;
+package animal.duck;
 
-import Animal.Animal;
+import animal.Animal;
 
-public abstract class Duck extends Animal {
+public class Duck extends Animal {
     public void say(){
     System.out.println("Кря");
 

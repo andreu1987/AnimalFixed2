@@ -1,6 +1,6 @@
-package Animal;
+package animal;
 
-public class Animal {
+public abstract class  Animal {
     private String name; // имя
     private int age; //возраст
     private int weight; // вес
@@ -60,7 +60,7 @@ public class Animal {
 
     @Override
     public String toString(){
-        return String.format("Привет! меня зовут %s, мне %s, я вешу - %d кг, мой цвет - %s",
+        return String.format("Привет! меня зовут %s, мне %s, я вешу - %d кг, мой цвет - %s.",
                 getName(),getAgeLet(), getWeight(),getColor());
     }
 
