@@ -1,9 +1,9 @@
 package factory;
 
-import Animal.Animal;
-import Cat.Cat;
-import Dog.Dog;
-import Duck.Duck;
+import animal.Animal;
+import animal.cat.Cat;
+import animal.dog.Dog;
+import animal.duck.Duck;
 import data.AnimalTypeData;
 
 public class Animalfactory {
