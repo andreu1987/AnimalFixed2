@@ -121,7 +121,7 @@ public class Main {
 
         Integer age = 0;
         do {
-            System.out.println("Ввидите возраст животного (от 1 до 7)");
+            System.out.println("Ввидите возраст животного (от 0 до 7)");
             age = CheckAgeString.ConvertIntStr(scanner.next());
 
             if (age != null) {
@@ -135,7 +135,7 @@ public class Main {
 
         Integer weight = 0;
         do {
-            System.out.println("Ввидите вес животного (от 1 до 20)");
+            System.out.println("Ввидите вес животного (от 0 до 20)");
             weight = CheckWeightString.ConvertWeigntString(scanner.next());
 
             if (weight != null) {
